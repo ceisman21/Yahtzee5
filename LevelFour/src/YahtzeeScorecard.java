@@ -329,7 +329,7 @@ public class YahtzeeScorecard
 			fullHouse = 25;
 			return true;
 		} else {
-			return false;
+			return true;
 		}
 	}
 
@@ -341,8 +341,17 @@ public class YahtzeeScorecard
 		4. Return true  */
 	public boolean markSmallStraight(int die1, int die2, int die3, int die4, int die5)
 	{
-		/* your code here */
-		return false;
+		smStraight = 0;
+		YahtzeeSortDice YSD = new YahtzeeSortDice(die1,die2,die3,die4,die5);
+		if (((YSD.getFirst() + 1) == YSD.getSecond()) && ((YSD.getSecond() + 1) == YSD.getThird()) && (YSD.getThird() + 1) == YSD.getFourth()) {
+			smStraight = 30;
+			return true;
+	} else if (((YSD.getSecond() + 1) == YSD.getThird()) && ((YSD.getThird() + 1) == YSD.getFourth()) && (YSD.getFourth() +1) == YSD.getFifth()) {
+			smStraight = 30;
+			return true;
+		} else {
+			return true;
+		}
 	}
 
 	/* 	1. If the field is already full, return false
@@ -353,8 +362,14 @@ public class YahtzeeScorecard
 		3. Return true  */
 	public boolean markLargeStraight(int die1, int die2, int die3, int die4, int die5)
 	{
-		/* your code here */
-		return false;
+		YahtzeeSortDice YSD = new YahtzeeSortDice(die1,die2,die3,die4,die5);
+		lgStraight = 0;
+		if (((YSD.getFirst() + 1) == YSD.getSecond()) && ((YSD.getSecond() + 1) == YSD.getThird()) && (YSD.getThird() + 1) == YSD.getFourth() && (YSD.getFourth() + 1) == YSD.getFifth()) {
+			lgStraight = 40;
+			return true;
+		} else {
+			return true;
+		}
 	}
 
 	/* 1. If the field is already full, return false
@@ -363,7 +378,12 @@ public class YahtzeeScorecard
 	public boolean markYahtzee(int die1, int die2, int die3, int die4, int die5)
 	{
 		/* your code here */
-		return false;
+		if (die1 == die2 && die2 == die3 && die3 == die4 && die4 == die5) {
+			fiveKind = 50;
+		} else {
+			fiveKind = 0;
+		}
+		return true;
 	}
 
 	/* 1. If the field is already full, return false
@@ -371,8 +391,8 @@ public class YahtzeeScorecard
 	   3. Return true  */
 	public boolean markChance(int die1, int die2, int die3, int die4, int die5)
 	{
-		/* your code here */
-		return false;
+		chance = sumTotalDie(die1,die2,die3,die4,die5);
+		return true;
 	}
 
 	/* 	1. If the bonus has already been assigned, do nothing
